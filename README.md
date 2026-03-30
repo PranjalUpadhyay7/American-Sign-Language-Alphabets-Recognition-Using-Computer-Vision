@@ -16,7 +16,24 @@ Built for scalability and robust real-world inference, this project processes RG
 
 The overarching pipeline spans from data ingestion and augmentation to inference. 
 
-![System Architecture](architecture.png)
+```mermaid
+flowchart TD
+    A[Raw ASL Directory] -->|ImageDataGenerator| B(Augmentation Engine)
+    B -->|Rotation, Shear, Zoom, Shift| C{Hybrid ResNet CNN}
+    C -->|Conv + ResBlocks| D[Deep Feature Extraction]
+    D -->|GAP + Dense Layers| E[29-Class Softmax]
+    E --> F[Predicted ASL Letter]
+    
+    classDef input fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#000
+    classDef process fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#000
+    classDef model fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000
+    classDef output fill:#fce4ec,stroke:#c2185b,stroke-width:2px,color:#000
+    
+    class A input;
+    class B,D process;
+    class C,E model;
+    class F output;
+```
 
 ---
 
@@ -24,34 +41,7 @@ The overarching pipeline spans from data ingestion and augmentation to inference
 
 The model deviates from traditional sequential CNNs by implementing **identity shortcuts (Residual Blocks)** accompanied by Batch Normalization. This topology promotes smoother gradient flow and robust convergence.
 
-<details open>
-<summary><b>Click to expand Model Flowchart</b></summary>
-
-```mermaid
-flowchart TD
-    IN((Input: 64x64x3 RGB)) --> C1[VGG-style Conv Block 1<br/>32 Filters + MaxPool + Dropout]
-    C1 --> R1[Residual Block 1<br/>Shortcut + Batch Norm]
-    
-    R1 --> C2[VGG-style Conv Block 2<br/>64 Filters + MaxPool + Dropout]
-    C2 --> R2[Residual Block 2<br/>Shortcut + Batch Norm]
-    
-    R2 --> C3[VGG-style Conv Block 3<br/>128 Filters + MaxPool + Dropout]
-    C3 --> R3[Residual Block 3<br/>Shortcut + Batch Norm]
-    
-    R3 --> GAP[[Global Average Pooling 2D]]
-    GAP --> D1[Dense 256 + Dropout: 0.5]
-    D1 --> D2[Dense 128 + Dropout: 0.3]
-    D2 --> OUT((Output Dense: 29 Softmax))
-    
-    classDef layer fill:#bbdefb,stroke:#1976d2,stroke-width:2px,color:#000
-    classDef resblock fill:#c8e6c9,stroke:#388e3c,stroke-width:2px,color:#000
-    classDef dense fill:#ffe0b2,stroke:#f57c00,stroke-width:2px,color:#000
-    
-    class IN,C1,C2,C3,GAP layer;
-    class R1,R2,R3 resblock;
-    class D1,D2,OUT dense;
-```
-</details>
+![Model Architecture Blueprint](architecture.png)
 
 ### Model Highlights:
 1. **Data Augmentation:** Real-time generation using `ImageDataGenerator` (15° rotation, 10% shift, zoom, shear) guarantees the model learns positional invariances.
