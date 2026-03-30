@@ -16,24 +16,7 @@ Built for scalability and robust real-world inference, this project processes RG
 
 The overarching pipeline spans from data ingestion and augmentation to inference. 
 
-```mermaid
-flowchart TD
-    A[Raw ASL Directory] -->|ImageDataGenerator| B(Augmentation Engine)
-    B -->|Rotation, Shear, Zoom, Shift| C{Hybrid ResNet CNN}
-    C -->|Conv + ResBlocks| D[Deep Feature Extraction]
-    D -->|GAP + Dense Layers| E[29-Class Softmax]
-    E --> F[Predicted ASL Letter]
-    
-    classDef input fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#000
-    classDef process fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#000
-    classDef model fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000
-    classDef output fill:#fce4ec,stroke:#c2185b,stroke-width:2px,color:#000
-    
-    class A input;
-    class B,D process;
-    class C,E model;
-    class F output;
-```
+![System Architecture](architecture.png)
 
 ---
 
@@ -84,6 +67,7 @@ flowchart TD
 │
 ├── 📄 train.ipynb           # Model definition, Data Pipeline, Training, Evaluation
 ├── 📄 best_model.keras      # Serialized weights of the best performing epoch
+├── 📄 architecture.png      # System architecture diagram
 ├── 📄 Pranjal_Upadhyay_22244.pdf # Detailed project report
 └── 📄 Presentation_PranjalUpadhyay_22244.pdf # Presentation slides
 ```
