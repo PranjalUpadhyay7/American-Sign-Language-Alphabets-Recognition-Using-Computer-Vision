@@ -1,6 +1,13 @@
 <div align="center">
-  <h1 style="color: #2E3440;">🖐️ ASL Alphabet Recognition Using Computer Vision</h1>
-  <p><strong><em>An end-to-end Deep Learning pipeline implementing a custom Residual Convolutional Neural Network (CNN) to classify 29 American Sign Language (ASL) gestures with high precision.</em></strong></p>
+
+# 🖐️ ASL Alphabet Recognition Using Computer Vision
+**An end-to-end Deep Learning pipeline implementing a custom Residual Convolutional Neural Network (CNN) to classify 29 American Sign Language (ASL) gestures with high precision.**
+
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
+[![Keras](https://img.shields.io/badge/Keras-%23D00000.svg?style=for-the-badge&logo=keras&logoColor=white)](https://keras.io/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white)](https://jupyter.org/)
+
 </div>
 
 ---
